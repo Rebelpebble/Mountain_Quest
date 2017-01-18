@@ -117,7 +117,7 @@ def battle():
         clear()
 
         print "You did %d damage." % fight_results[0]
-        print "The %s did %d damage.\n" % (monster.display_name, fight_results[1])
+        print "The %s did %d damage.\n" % (monster.display_name.lower(), fight_results[1])
         # TREY: Do the following two lines smell?
         print " " * (len(monster.display_name) - 3), "My HP: ", "-" * my_health
         print "%s HP: " % monster.display_name, "-" * monster.current_health
@@ -133,14 +133,22 @@ def fight(choice):
         my_health -= int(monster_attack / my_armor.damage_reduction())
         monster.take_damage(my_attack)
 
+        died()
+
         return my_attack, monster_attack
 
     else:
         exit(0)
 
+def died():
+    if my_health <= 0:
+        clear()
+        print "You died!"
+        exit(0)
+
 my_health = 20
-my_weapon = SteelSword()
-my_armor = IronArmor()
+my_weapon = Hands()
+my_armor = Clothes()
 monster = Troll()
 
 battle()
