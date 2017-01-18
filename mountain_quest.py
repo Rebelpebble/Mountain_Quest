@@ -1,4 +1,5 @@
 import random
+import os
 from sys import exit
 
 ### Monsters ###
@@ -97,19 +98,26 @@ class DragonNecklace(Armor):
 ######
 
 
+
+def clear():
+    os.system('clear')
+
 def battle():
-    print "A %s appeared!" % monster.display_name.lower()
+    clear()
+
+    print "A %s appeared!\n" % monster.display_name.lower()
     print " " * (len(monster.display_name) - 3), "My HP: ", "-" * my_health
     print "%s HP: " % monster.display_name, "-" * monster.current_health
 
     while monster.is_alive():
-        print "Will you fight (1) or flee (2)?"
+        print "\nWill you fight (1) or flee (2)?"
 
         choice = raw_input("> ")
         fight_results = fight(choice)
+        clear()
 
         print "You did %d damage." % fight_results[0]
-        print "The %s did %d damage." % (monster.display_name, fight_results[1])
+        print "The %s did %d damage.\n" % (monster.display_name, fight_results[1])
         # TREY: Do the following two lines smell?
         print " " * (len(monster.display_name) - 3), "My HP: ", "-" * my_health
         print "%s HP: " % monster.display_name, "-" * monster.current_health
@@ -120,7 +128,9 @@ def fight(choice):
     if choice == "1":
         my_attack = my_weapon.attack()
         monster_attack = monster.attack()
-        my_health -= monster_attack
+        # Armor damage reduction is a float and the damage needs to be
+        # converted to an integer.
+        my_health -= int(monster_attack / my_armor.damage_reduction())
         monster.take_damage(my_attack)
 
         return my_attack, monster_attack
@@ -130,8 +140,8 @@ def fight(choice):
 
 my_health = 20
 my_weapon = SteelSword()
-my_armor = Clothes()
-monster = Goblin()
+my_armor = IronArmor()
+monster = Troll()
 
 battle()
 print my_health
