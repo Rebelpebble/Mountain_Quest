@@ -18,14 +18,14 @@ class Goblin(Monster):
     starting_health = 10
 
     def attack(self):
-        return random.randint(0, 5)
+        return random.randint(0, 2)
 
 class Troll(Monster):
     display_name = "troll"
     starting_health = 20
 
     def attack(self):
-        return random.randint(2, 10)
+        return random.randint(2, 5)
 
 class Basilisk(Monster):
     display_name = "basilisk"
@@ -47,16 +47,27 @@ class Weapon(object):
     pass
 
 class Hands(Weapon):
-    pass
+
+    def attack(self):
+        return random.randint(0, 2)
 
 class IronSword(Weapon):
-    pass
+
+    def attack(self):
+        return random.randint(3, 8)
 
 class SteelSword(Weapon):
-    pass
+
+    def attack(self):
+        return random.randint(6, 12)
 
 class DragonSword(Weapon):
-    pass
+
+    def attack(self):
+        return random.randint(6, 12)
+
+    def dragon_attack(self):
+        return random.randint(16, 35)
 ######
 
 ### Armor ###
