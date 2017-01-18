@@ -75,11 +75,22 @@ class Armor(object):
     pass
 
 class Clothes(Armor):
-    pass
+
+    def damage_reduction(self):
+        return 1
 
 class IronArmor(Armor):
-    pass
+
+    def damage_reduction(self):
+        return 1.25
 
 class SteelArmor(Armor):
-    pass
+
+    def damage_reduction(self):
+        return 1.75
+
+class DragonNecklace(Armor):
+
+    def damage_reduction(self):
+        return 3
 ######
