@@ -1,41 +1,42 @@
 import random
+from sys import exit
 
 ### Monsters ###
 class Monster(object):
 
     def __init__(self):
-        # TREY: Why is it necessary to do this?
+        # TREY: Why is it necessary to do this? Is this to give each instance a current health?
         self.current_health = self.starting_health
 
     def is_alive(self):
-        return current_health > 0
+        return self.current_health > 0
 
     def take_damage(self, damage):
-        self.current_health = self.current_health - damage
+        self.current_health -= damage
 
 class Goblin(Monster):
-    display_name = "goblin"
+    display_name = "Goblin"
     starting_health = 10
 
     def attack(self):
         return random.randint(0, 2)
 
 class Troll(Monster):
-    display_name = "troll"
+    display_name = "Troll"
     starting_health = 20
 
     def attack(self):
         return random.randint(2, 5)
 
 class Basilisk(Monster):
-    display_name = "basilisk"
+    display_name = "Basilisk"
     starting_health = 30
 
     def attack(self):
         return random.randint(9, 15)
 
 class Dragon(Monster):
-    display_name = "grand dragon"
+    display_name = "Grand Dragon"
     starting_health = 100
 
     def attack(self):
@@ -94,3 +95,43 @@ class DragonNecklace(Armor):
     def damage_reduction(self):
         return 3
 ######
+
+
+def battle():
+    print "A %s appeared!" % monster.display_name.lower()
+    print " " * (len(monster.display_name) - 3), "My HP: ", "-" * my_health
+    print "%s HP: " % monster.display_name, "-" * monster.current_health
+
+    while monster.is_alive():
+        print "Will you fight (1) or flee (2)?"
+
+        choice = raw_input("> ")
+        fight_results = fight(choice)
+
+        print "You did %d damage." % fight_results[0]
+        print "The %s did %d damage." % (monster.display_name, fight_results[1])
+        # TREY: Do the following two lines smell?
+        print " " * (len(monster.display_name) - 3), "My HP: ", "-" * my_health
+        print "%s HP: " % monster.display_name, "-" * monster.current_health
+
+def fight(choice):
+    global my_health
+
+    if choice == "1":
+        my_attack = my_weapon.attack()
+        monster_attack = monster.attack()
+        my_health -= monster_attack
+        monster.take_damage(my_attack)
+
+        return my_attack, monster_attack
+
+    else:
+        exit(0)
+
+my_health = 20
+my_weapon = SteelSword()
+my_armor = Clothes()
+monster = Goblin()
+
+battle()
+print my_health
