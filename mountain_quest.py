@@ -2,6 +2,16 @@ import random
 import os
 from sys import exit
 
+### My Information ###
+# class MyInfo(object):
+#     starting_health = 20
+#     my_health = starting_health
+#     my_weapon = Hands()
+#     my_armor = Clothes()
+#
+# print MyInfo.my_health
+
+
 ### Monsters ###
 class Monster(object):
 
@@ -26,23 +36,27 @@ class Troll(Monster):
     display_name = "Troll"
     starting_health = 20
 
-    def attack(self):
+    @staticmethod
+    def attack():
         return random.randint(2, 5)
 
 class Basilisk(Monster):
     display_name = "Basilisk"
     starting_health = 30
 
-    def attack(self):
+    @staticmethod
+    def attack():
         return random.randint(9, 15)
 
 class Dragon(Monster):
-    display_name = "Grand Dragon"
+    display_name = "Dragon"
     starting_health = 100
 
-    def attack(self):
+    @staticmethod
+    def attack():
         return random.randint(30, 50)
 ######
+
 
 ### Weapons ###
 class Weapon(object):
@@ -50,27 +64,32 @@ class Weapon(object):
 
 class Hands(Weapon):
 
-    def attack(self):
+    @staticmethod
+    def attack():
         return random.randint(0, 2)
 
 class IronSword(Weapon):
 
-    def attack(self):
+    @staticmethod
+    def attack():
         return random.randint(3, 8)
 
 class SteelSword(Weapon):
 
-    def attack(self):
+    @staticmethod
+    def attack():
         return random.randint(6, 12)
 
 class DragonSword(Weapon):
 
-    def attack(self):
+    @staticmethod
+    def attack():
         return random.randint(6, 12)
 
-    def dragon_attack(self):
+    def dragon_attack():
         return random.randint(16, 35)
 ######
+
 
 ### Armor ###
 class Armor(object):
@@ -78,27 +97,31 @@ class Armor(object):
 
 class Clothes(Armor):
 
-    def damage_reduction(self):
+    @staticmethod
+    def damage_reduction():
         return 1
 
 class IronArmor(Armor):
 
-    def damage_reduction(self):
+    @staticmethod
+    def damage_reduction():
         return 1.25
 
 class SteelArmor(Armor):
 
-    def damage_reduction(self):
+    @staticmethod
+    def damage_reduction():
         return 1.75
 
 class DragonNecklace(Armor):
 
-    def damage_reduction(self):
+    @staticmethod
+    def damage_reduction():
         return 3
 ######
 
 
-
+### Fighting System ###
 def clear():
     os.system('clear')
 
@@ -121,6 +144,9 @@ def battle():
         # TREY: Do the following two lines smell?
         print " " * (len(monster.display_name) - 3), "My HP: ", "-" * my_health
         print "%s HP: " % monster.display_name, "-" * monster.current_health
+
+    print "You beat the %s!" % monster.display_name.lower()
+    reset_health()
 
 def fight(choice):
     global my_health
@@ -146,9 +172,24 @@ def died():
         print "You died!"
         exit(0)
 
-my_health = 20
+def reset_health():
+    global my_health
+    my_health = my_starting_health
+######
+
+quests = {
+    '': ''
+
+}
+
+
+
+my_starting_health = 20
+my_health = my_starting_health
 my_weapon = Hands()
 my_armor = Clothes()
+inventory = {}
+
 monster = Troll()
 
 battle()
