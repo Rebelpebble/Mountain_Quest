@@ -177,12 +177,65 @@ def reset_health():
     my_health = my_starting_health
 ######
 
+
+### Story ###
+def town():
+    pass
+
+def store():
+    pass
+
+def town_hall():
+    pass
+
+def widows_house():
+    pass
+
+def gate():
+    pass
+
+def frontier():
+    pass
+
+def goblins_den():
+    pass
+
+def meadow():
+    pass
+
+def mountain_pass():
+    pass
+
+def fork_in_the_road():
+    pass
+
+def injured_traveler():
+    pass
+
+def maze():
+    pass
+
+def old_armory():
+    pass
+
+def rocky_pass():
+    pass
+
+def basilisks_lair():
+    pass
+
+def burnt_skeleton():
+    pass
+
+def dragon_final_battle():
+    pass
+######
+
 quest = {}
 for x in range(0, 11):
     quest[x] = False
 print quest
 raw_input()
-
 
 
 my_starting_health = 20
