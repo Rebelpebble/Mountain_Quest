@@ -2,14 +2,18 @@ import random
 import os
 from sys import exit
 
-### My Information ###
-# class MyInfo(object):
-#     starting_health = 20
-#     my_health = starting_health
-#     my_weapon = Hands()
-#     my_armor = Clothes()
-#
-# print MyInfo.my_health
+### Player Information ###
+class Player(object):
+    starting_health = 20
+
+    def __init__(self, my_weapon, my_armor):
+        self.my_health = self.starting_health
+        self.my_weapon = my_weapon
+        self.my_armor = my_armor
+
+    def reset_health(self):
+        self.my_health = self.starting_health
+
 
 
 ### Monsters ###
@@ -120,17 +124,19 @@ class DragonNecklace(Armor):
         return 3
 ######
 
-
-### Fighting System ###
 def clear():
     os.system('clear')
+
+### Fighting System ###
+def print_health():
+    print " " * (len(monster.display_name) - 3), "My HP: ", "-" * my_health
+    print "%s HP: " % monster.display_name, "-" * monster.current_health
 
 def battle():
     clear()
 
     print "A %s appeared!\n" % monster.display_name.lower()
-    print " " * (len(monster.display_name) - 3), "My HP: ", "-" * my_health
-    print "%s HP: " % monster.display_name, "-" * monster.current_health
+    print_health()
 
     while monster.is_alive():
         print "\nWill you fight (1) or flee (2)?"
@@ -142,8 +148,7 @@ def battle():
         print "You did %d damage." % fight_results[0]
         print "The %s did %d damage.\n" % (monster.display_name.lower(), fight_results[1])
         # TREY: Do the following two lines smell?
-        print " " * (len(monster.display_name) - 3), "My HP: ", "-" * my_health
-        print "%s HP: " % monster.display_name, "-" * monster.current_health
+        print_health()
 
     print "You beat the %s!" % monster.display_name.lower()
     reset_health()
@@ -180,10 +185,68 @@ def reset_health():
 
 ### Story ###
 def town():
-    pass
+    clear()
+
+    print (
+    "You are a traveller having arrived in the small town of Smalltown.\n"
+    "Where do you go?\n"
+    "(1) Store\n"
+    "(2) Town Hall\n"
+    "(3) Widow\'s House\n"
+    "(4) Large Gate\n")
+
+    choice = raw_input("> ")
+
+    if choice == "1":
+        store()
+    elif choice == "2":
+        town_hall()
+    elif choice == "3":
+        widows_house()
+    elif choice == "4":
+        gate()
+    else:
+        town()
 
 def store():
-    pass
+    clear()
+
+    print(
+    "Hmm. You don\'t look like you are from around here.\n"
+    "Anyways, how can I help you?"
+    "(1) Buy sword.\n"
+    "(2) But armor.\n"
+    "(3) Leave the store.\n"
+    )
+
+    choice = raw_input("> ")
+
+    if choice == "1":
+        buy_sword()
+    elif choice == "2":
+        buy_armor()
+    elif choice == "3":
+        town()
+    else:
+        store()
+
+def buy_sword():
+    print "That will be 10 gold coins please."
+    global quests
+
+    if quests[0] == True and quests[1] == True:
+        print "Looks like you already have a sword, bub."
+    elif quests[0] == True and quests[1] == False:
+        print "Thanks for your business."
+        print "Here's your sword."
+        print "*The store owner give you a sword.*"
+        quest[1] = True
+    else:
+        print "Get outta here you penniless hobo!"
+
+    print "Press enter to leave the store."
+    raw_input("> ")
+    town()
 
 def town_hall():
     pass
@@ -231,20 +294,10 @@ def dragon_final_battle():
     pass
 ######
 
-quest = {}
+quests = {}
 for x in range(0, 11):
-    quest[x] = False
-print quest
-raw_input()
+    quests[x] = False
 
+player = Player(Hands(), Clothes())
 
-my_starting_health = 20
-my_health = my_starting_health
-my_weapon = Hands()
-my_armor = Clothes()
-inventory = {}
-
-monster = Troll()
-
-battle()
-print my_health
+town()
