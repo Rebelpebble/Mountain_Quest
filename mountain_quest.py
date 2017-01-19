@@ -177,10 +177,11 @@ def reset_health():
     my_health = my_starting_health
 ######
 
-quests = {
-    '': ''
-
-}
+quest = {}
+for x in range(0, 11):
+    quest[x] = False
+print quest
+raw_input()
 
 
 
