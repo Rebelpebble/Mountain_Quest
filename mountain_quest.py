@@ -6,14 +6,14 @@ from sys import exit
 class Player(object):
     starting_health = 20
 
-    def __init__(self, my_weapon, my_armor):
+    def __init__(self, my_weapon, my_armor, quests):
         self.my_health = self.starting_health
         self.my_weapon = my_weapon
         self.my_armor = my_armor
+        self.quests = quests
 
     def reset_health(self):
         self.my_health = self.starting_health
-
 
 
 ### Monsters ###
@@ -73,24 +73,24 @@ class Hands(Weapon):
         return random.randint(0, 2)
 
 class IronSword(Weapon):
+    display_name = "iron sword"
 
     @staticmethod
     def attack():
         return random.randint(3, 8)
 
 class SteelSword(Weapon):
+    display_name = "steel sword"
 
     @staticmethod
     def attack():
         return random.randint(6, 12)
 
 class DragonSword(Weapon):
+    display_name = "dragon sword"
 
     @staticmethod
     def attack():
-        return random.randint(6, 12)
-
-    def dragon_attack():
         return random.randint(16, 35)
 ######
 
@@ -106,18 +106,21 @@ class Clothes(Armor):
         return 1
 
 class IronArmor(Armor):
+    display_name = "iron armor"
 
     @staticmethod
     def damage_reduction():
         return 1.25
 
 class SteelArmor(Armor):
+    display_name = "steel armor"
 
     @staticmethod
     def damage_reduction():
         return 1.75
 
 class DragonNecklace(Armor):
+    display_name = "dragon necklace"
 
     @staticmethod
     def damage_reduction():
@@ -213,10 +216,10 @@ def store():
 
     print(
     "Hmm. You don\'t look like you are from around here.\n"
-    "Anyways, how can I help you?"
+    "Anyways, how can I help you?\n"
     "(1) Buy sword.\n"
-    "(2) But armor.\n"
-    "(3) Leave the store.\n"
+    "(2) Buy armor.\n"
+    "(3) Leave the store."
     )
 
     choice = raw_input("> ")
@@ -231,20 +234,40 @@ def store():
         store()
 
 def buy_sword():
-    print "That will be 10 gold coins please."
-    global quests
+    print "\nThat will be 10 gold coins please."
 
-    if quests[0] == True and quests[1] == True:
+    if quests[1] == True:
         print "Looks like you already have a sword, bub."
-    elif quests[0] == True and quests[1] == False:
-        print "Thanks for your business."
-        print "Here's your sword."
-        print "*The store owner give you a sword.*"
+    elif quests[0] == True:
+        print "Thank you for your business."
+        print "Here's your new iron sword."
+        print "*The store owner gives you a sword.*"
         quest[1] = True
+        player.my_weapon = IronSword()
     else:
+        print "Wait a minute...you don't have a dime on you!"
         print "Get outta here you penniless hobo!"
 
-    print "Press enter to leave the store."
+    print "\nPress enter to leave the store."
+    raw_input("> ")
+    town()
+
+def buy_armor():
+    print "\nThat will be 30 gold coins please."
+
+    if quests[3] == True:
+        print "Looks like you already have armor, bub."
+    elif quests[2] == True:
+        print "Thank you for your business."
+        print "Here's your new iron armor."
+        print "*The store owner gives you armor.*"
+        quest[3] = True
+        player.my_armor = IronArmor()
+    else:
+        print "Wait a minute...you don't have a dime on you!"
+        print "Get outta here you penniless hobo!"
+
+    print "\nPress enter to leave the store."
     raw_input("> ")
     town()
 
@@ -298,6 +321,6 @@ quests = {}
 for x in range(0, 11):
     quests[x] = False
 
-player = Player(Hands(), Clothes())
+player = Player(Hands(), Clothes(), quests)
 
 town()
