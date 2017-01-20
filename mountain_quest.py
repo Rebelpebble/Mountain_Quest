@@ -68,6 +68,10 @@ def reset_health():
 
 
 ### Story ###
+def back_to_town():
+    raw_input("Press ENTER")
+    town()
+
 def town():
     clear()
 
@@ -115,11 +119,12 @@ def store():
         store()
 
 def buy_sword():
+
     print "\nThat will be 10 gold coins please."
     print player.weapon
 
     #Broken
-    if player.weapon != Hands():
+    if player.weapon != XXXXX:
         print "But it looks like you already have a sword, bub."
     elif quests[0] == True:
         print "Thank you for your business."
@@ -129,15 +134,14 @@ def buy_sword():
     else:
         print "Sorry but, uhhh, it looks like you don't have enough."
 
-    print "\nPress ENTER to leave the store."
-    raw_input("> ")
-    town()
+    back_to_town()
 
 def buy_armor():
+
     print "\nThat will be 30 gold coins please."
 
     #Broken
-    if player.armor != Clothes():
+    if player.armor != XXXXX:
         print "But it looks like you already have armor, bub."
     elif player.gold == 10:
         print "Thank you for your business."
@@ -148,12 +152,29 @@ def buy_armor():
     else:
         print "Sorry but, uhhh, it looks like you don't have enough."
 
-    print "\nPress ENTER to leave the store."
-    raw_input("> ")
-    town()
+    back_to_town()
 
 def town_hall():
-    pass
+    clear()
+
+    if player.quests[1] == True:
+        print "Thank you so much for saving us!"
+    elif player.quests[0] == True and player.inventory['goblin head'] == True:
+        print "Oh thank you, thank you kind sir! Here is your reward!"
+        print "*The mayor gives you 30 gold coins.*"
+        player.add_gold(30)
+    elif player.quests[0] == True and player.inventory['goblin head'] == False:
+        print "Please come back once you have slain that awful beast."
+    else:
+        print "Oh dear. A goblin outside the city has been terrorizing the town."
+        print "I know! You could slay the goblin!"
+        print "Here go buy yourself a sword and come back with it\'s head"
+        print "for and award."
+        print "*The mayor hands you 10 gold coins."
+        player.add_gold(10)
+        player.quests[0] = True
+
+    back_to_town()
 
 def widows_house():
     pass

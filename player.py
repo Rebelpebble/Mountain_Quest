@@ -5,8 +5,8 @@ class Player(object):
         self.health = self.starting_health
         self.weapon = weapon
         self.armor = armor
-        self.quests = generate_quests
-        self.inventory = {}
+        self.quests = self.generate_quests()
+        self.inventory = {'goblin head': False}
         self.gold = 0
 
     def reset_health(self):
@@ -18,8 +18,9 @@ class Player(object):
     def subtract_gold(self, gold_removed):
         self.gold += gold_removed
 
-def generate_quests():
-    quests = {}
-    for x in range(0, 11):
-        quests[x] = False
-    return quests
+    @staticmethod
+    def generate_quests():
+        quests = {}
+        for x in range(0, 11):
+            quests[x] = False
+        return quests
