@@ -116,39 +116,39 @@ def store():
 
 def buy_sword():
     print "\nThat will be 10 gold coins please."
+    print player.weapon
 
-    if quests[1] == True:
-        print "Looks like you already have a sword, bub."
+    #Broken
+    if player.weapon != Hands():
+        print "But it looks like you already have a sword, bub."
     elif quests[0] == True:
         print "Thank you for your business."
         print "Here's your new iron sword."
         print "*The store owner gives you a sword.*"
-        quest[1] = True
-        player.my_weapon = IronSword()
+        player.weapon = IronSword()
     else:
-        print "Wait a minute...you don't have a dime on you!"
-        print "Get outta here you penniless hobo!"
+        print "Sorry but, uhhh, it looks like you don't have enough."
 
-    print "\nPress enter to leave the store."
+    print "\nPress ENTER to leave the store."
     raw_input("> ")
     town()
 
 def buy_armor():
     print "\nThat will be 30 gold coins please."
 
-    if quests[3] == True:
-        print "Looks like you already have armor, bub."
-    elif quests[2] == True:
+    #Broken
+    if player.armor != Clothes():
+        print "But it looks like you already have armor, bub."
+    elif player.gold == 10:
         print "Thank you for your business."
         print "Here's your new iron armor."
         print "*The store owner gives you armor.*"
         quest[3] = True
         player.my_armor = IronArmor()
     else:
-        print "Wait a minute...you don't have a dime on you!"
-        print "Get outta here you penniless hobo!"
+        print "Sorry but, uhhh, it looks like you don't have enough."
 
-    print "\nPress enter to leave the store."
+    print "\nPress ENTER to leave the store."
     raw_input("> ")
     town()
 
@@ -198,13 +198,6 @@ def dragon_final_battle():
     pass
 ######
 
-quests = {}
-for x in range(0, 11):
-    quests[x] = False
-
-inventory = {}
-gold = 0
-
-player = Player(Hands(), Clothes(), quests, inventory, gold)
+player = Player(Hands(), Clothes())
 
 town()

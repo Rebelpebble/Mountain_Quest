@@ -1,13 +1,13 @@
 class Player(object):
     starting_health = 20
 
-    def __init__(self, weapon, armor, quests, inventory, gold):
+    def __init__(self, weapon, armor):
         self.health = self.starting_health
         self.weapon = weapon
         self.armor = armor
-        self.quests = quests
-        self.inventory = inventory
-        self.gold = gold
+        self.quests = generate_quests
+        self.inventory = {}
+        self.gold = 0
 
     def reset_health(self):
         self.health = self.starting_health
@@ -17,3 +17,9 @@ class Player(object):
 
     def subtract_gold(self, gold_removed):
         self.gold += gold_removed
+
+def generate_quests():
+    quests = {}
+    for x in range(0, 11):
+        quests[x] = False
+    return quests
