@@ -202,6 +202,9 @@ quests = {}
 for x in range(0, 11):
     quests[x] = False
 
-player = Player(Hands(), Clothes(), quests)
+inventory = {}
+gold = 0
+
+player = Player(Hands(), Clothes(), quests, inventory, gold)
 
 town()
