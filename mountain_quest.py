@@ -2,6 +2,7 @@
 from monsters import *
 from armor import *
 from weapons import *
+from player import *
 
 import random
 import os
@@ -99,7 +100,7 @@ def store():
     "Anyways, how can I help you?\n"
     "(1) Buy sword.\n"
     "(2) Buy armor.\n"
-    "(3) Leave the store."
+    "(3) Leave the store.\n"
     )
 
     choice = raw_input("> ")
