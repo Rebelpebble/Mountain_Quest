@@ -99,7 +99,7 @@ class BuyScene(Scene):
         print "Thank you for you business."
         print "Here's you new " + self.item_class.display_name + "."
         # ADD FUNCTIONALITY FOR ARMOR
-        player.weapon = self.item_class()
+        player.weapon = self.item_class
         return self.go_back_to_store
 
     def go_back_to_store(self):
