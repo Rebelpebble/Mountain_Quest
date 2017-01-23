@@ -1,6 +1,6 @@
 from player import Player
 from world import World
-from scenes import Scenes
+from scenes import scenes
 
 def main():
     player = Player()

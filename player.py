@@ -1,11 +1,11 @@
-from weapons import weapons
+from weapons import Hands
 from armor import Clothes
 from quests import QuestTracker
 
 class Player(object):
     starting_health = 20
 
-    def __init__(self, weapon, armor):
+    def __init__(self):
         self.health = self.starting_health
         self.weapon = Hands()
         self.armor = Clothes()

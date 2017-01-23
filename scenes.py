@@ -24,10 +24,10 @@ scenes = [
             SceneChoice("Buy armor", "buy_armor"),
             SceneChoice("Leave the store", "town")
         ]
-    )
+    ),
 
-    TownHallScene("town_hall")
-    BuyScene("buy_sword", IronSword, 10)
-    BuyScene("buy_armor", IronArmor, 30)
+    TownHallScene("town_hall"),
+    BuyScene("buy_sword", IronSword, 10),
+    BuyScene("buy_armor", IronArmor, 30),
 
 ]
